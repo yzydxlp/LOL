@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import Login from '../views/Login.vue'
 import Main from '../views/Main.vue'
 import CategoryEdit from '../views/CategoryEdit.vue'
 import CategoryList from '../views/CategoryList.vue'
@@ -12,9 +13,24 @@ import HeroList from '../views/HeroList.vue'
 
 import ArticleEdit from '../views/ArticleEdit.vue'
 import ArticleList from '../views/ArticleList.vue'
+
+import PromoEdit from '../views/PromoEdit.vue'
+import PromoList from '../views/PromoList.vue'
+
+import AdminUserEdit from '../views/AdminUserEdit.vue'
+import AdminUserList from '../views/AdminUserList.vue'
 Vue.use(VueRouter)
 
+
 const routes = [
+  {
+    path:'/login',
+    name:'login',
+    component:Login,
+    meta: {
+      isPublic:true
+    }
+  },
   {
     path: '/',
     name: 'main',
@@ -36,6 +52,13 @@ const routes = [
       {path:'/articles/edit/:id',component:ArticleEdit,props:true},
       {path:'/articles/list',component:ArticleList},
       
+      {path:'/promos/create',component:PromoEdit},
+      {path:'/promos/edit/:id',component:PromoEdit,props:true},
+      {path:'/promos/list',component:PromoList},
+
+      {path:'/admin_users/create',component:AdminUserEdit},
+      {path:'/admin_users/edit/:id',component:AdminUserEdit,props:true},
+      {path:'/admin_users/list',component:AdminUserList},
     ]
   }
 ]
@@ -43,5 +66,10 @@ const routes = [
 const router = new VueRouter({
   routes
 })
-
+router.beforeEach((to,from,next)=> {
+  if(!to.meta.isPublic && !localStorage.token) {
+    return next('/login')
+  }
+  next()
+})
 export default router

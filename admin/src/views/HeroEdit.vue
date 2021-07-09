@@ -32,8 +32,9 @@
           </el-form-item>
           <el-form-item label="头像">
             <el-upload
+                :headers="getAuthHeaders()"
                 class="avatar-uploader"
-                :action="$http.defaults.baseURL + '/upload'"
+                :action="uploadUrl"
                 :show-file-list="false"
                 :on-success="afterUpload">
                 <img v-if="model.avatar" :src="model.avatar" class="avatar">
@@ -157,29 +158,7 @@
 </script>
 
 <style>
-  .avatar-uploader .el-upload {
-    border: 1px dashed #d9d9d9;
-    border-radius: 6px;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-  }
-  .avatar-uploader .el-upload:hover {
-    border-color: #409EFF;
-  }
-  .avatar-uploader-icon {
-    font-size: 28px;
-    color: #8c939d;
-    width: 5rem;
-    height: 5rem;
-    line-height: 5rem;
-    text-align: center;
-  }
-  .avatar {
-    width: 5rem;
-    height: 5rem;
-    display: block;
-  }
+  
   .cards{
     margin-bottom: 1rem;
   }
