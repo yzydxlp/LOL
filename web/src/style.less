@@ -1,0 +1,139 @@
+//reset
+* {
+  box-sizing: border-box;
+  outline: none;
+}
+
+html {
+  font-size: 13px;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.2em;
+  background-color: #f1f1f1;
+}
+
+a {
+  color:#1f271b;
+}
+//colors
+@colors:{
+  lol-white:#fff;
+  lol-light:#f9f9f9;
+  lol-gray:#999;
+  lol-yellow:#f4d35e;
+  lol-blue:#28afb0;
+  lol-primary:#ee964b;
+  lol-dark-blue:#19647e;
+  lol-dark-gray:#333;
+  lol-black:#1f271b;
+}
+
+each(@colors,{
+  .text-@{key}{
+    color:@value
+  }
+  .bg-@{key}{
+    background-color:@value
+  }
+})
+
+//text
+@selectors: left, center, right;
+each(@selectors,{
+  .text-@{value} {
+    text-align: @value;
+  }
+})
+//font-size
+@base-font-size:1rem;
+@font-sizes:{
+  xs:0.7692;//10
+  sm:0.9231;//12
+  md:1;//13
+  lg:1.0769;//14
+  xl:1.2308;//16
+};
+each(@font-sizes,{
+  .fs-@{key}{
+    font-size:@value * @base-font-size
+  }
+})
+
+//flex
+.d-flex {
+  display: flex;
+}
+.flex-column {
+  flex-direction:column
+}
+.flex-1 {
+  flex:1
+}
+.flex-grow-1{
+  flex-grow: 1;
+}
+@flex-jc: {
+  start:flex-start;
+  end:flex-end;
+  center:center;
+  between:space-between;
+  around:space-around;
+};
+each(@flex-jc,{
+  .jc-@{key} {
+    justify-content: @value;
+  }
+})
+
+@flex-ai: {
+  start:flex-start;
+  end:flex-end;
+  center:center;
+  stretch:stretch
+};
+each(@flex-ai,{
+  .ai-@{key} {
+    align-items: @value;
+  }
+})
+
+//spacing
+@spacing-types:{
+  m:margin;
+  p:padding
+};
+@spacing-directions:{t:top;r:right;b:bottom;l:left}
+@spacing-base-size:1rem;
+@spacing-sizes:{0:0;1:0.25;2:0.5;3:1;4:1.5;5:3}
+
+each(@spacing-types,.(@typeKey,@type) {
+  each(@spacing-sizes,.(@sizeKey,@size) {
+    // .m-1 {margin-top:0.25rem}
+    .@{type}-@{size} {
+      @{typeKey} : @sizeKey * @spacing-base-size
+
+    }
+    //.mx-1
+    .@{type}x-@{size} {
+      @{typeKey}-left : @sizeKey * @spacing-base-size;
+      @{typeKey}-right : @sizeKey * @spacing-base-size
+    }
+    //.my-1
+    .@{type}y-@{size} {
+      @{typeKey}-top : @sizeKey * @spacing-base-size;
+      @{typeKey}-bottom : @sizeKey * @spacing-base-size
+    }
+  })
+  //.mt-1
+  each(@spacing-directions,.(@directionKey,@direction){
+    each(@spacing-sizes,.(@sizeKey,@size) {
+      .@{type}@{direction}-@{size} {
+        @{typeKey}-@{directionKey} : @sizeKey * @spacing-base-size
+      }
+    })
+  })
+})
+
