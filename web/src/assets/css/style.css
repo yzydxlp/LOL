@@ -10,6 +10,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.2em;
   background-color: #f1f1f1;
+  -webkit-font-smoothing: antialiased;
 }
 a {
   color: #1f271b;
@@ -25,6 +26,12 @@ a {
 }
 .bg-lol-light {
   background-color: #f9f9f9;
+}
+.text-lol-navbg {
+  color: #e3e2e2;
+}
+.bg-lol-navbg {
+  background-color: #e3e2e2;
 }
 .text-lol-gray {
   color: #999;
@@ -69,13 +76,16 @@ a {
   background-color: #1f271b;
 }
 .text-left {
-  text-align: left;
+  text-align: left !important;
 }
 .text-center {
-  text-align: center;
+  text-align: center !important;
 }
 .text-right {
-  text-align: right;
+  text-align: right !important;
+}
+.fs-xxs {
+  font-size: 0.6154rem;
 }
 .fs-xs {
   font-size: 0.7692rem;
@@ -91,6 +101,15 @@ a {
 }
 .fs-xl {
   font-size: 1.2308rem;
+}
+.w-100 {
+  width: 100%;
+}
+.h-100 {
+  height: 100%;
+}
+.d-block {
+  display: block;
 }
 .d-flex {
   display: flex;
@@ -406,4 +425,15 @@ a {
 }
 .pl-5 {
   padding-left: 3rem;
+}
+.btn {
+  border: none;
+  border-radius: 0.1538rem;
+}
+.nav .nav-item {
+  border-bottom: 3px solid transparent;
+  padding-bottom: 0.1rem;
+}
+.nav .nav-item.active {
+  border-bottom: 3px solid white;
 }
