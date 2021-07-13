@@ -11,7 +11,7 @@
       <button type="button" class="btn bg-lol-primary">立即下载</button>
     </div>
     <div class="bg-lol-primary py-3">
-      <div class="nav d-flex text-lol-light jc-around">
+      <div class="nav text-lol-light nav-invers jc-around">
         <div class="nav-item active">
           <router-link tag="div" to="/" class="nav-link">首页</router-link>
         </div>
@@ -36,6 +36,10 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped lang="less">
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+  }
 </style>

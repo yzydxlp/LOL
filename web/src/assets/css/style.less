@@ -22,6 +22,10 @@ a {
   color:#1f271b;
 }
 
+p {
+  line-height: 2em;
+}
+
 
 each(@colors,{
   .text-@{key}{
@@ -40,9 +44,17 @@ each(@selectors,{
 
 each(@font-sizes,{
   .fs-@{key}{
-    font-size:@value * @base-font-size
+    font-size:@value * @base-font-size !important;
   }
 })
+
+//text overflow
+.text-ellipsis{
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 //width,height
 .w-100 {
   width:100%;
@@ -60,6 +72,9 @@ each(@font-sizes,{
 }
 .flex-column {
   flex-direction:column
+}
+.flex-wrap{
+  flex-wrap: wrap;
 }
 .flex-1 {
   flex:1
@@ -114,12 +129,88 @@ each(@spacing-types,.(@typeKey,@type) {
 }
 //nav
 .nav{
+  display:flex;
   .nav-item {
     border-bottom : 3px solid transparent;
     padding-bottom: 0.1rem;
     &.active{
-      border-bottom : 3px solid white;
+      color: @lol-primary;
+      border-bottom-color : @lol-primary;
+    }
+  }
+  &.nav-invers{
+    .nav-item{
+      color: @lol-white;
+      &.active{
+        border-bottom-color: @lol-white;
+      }
     }
   }
 }
-
+//sprite
+.sprite{
+  background: url('../comm-spr.png') no-repeat;
+  // background-size: 28.8462rem;
+  display: inline-block;
+  &.sprite-kf{
+    width: 1.6923rem;
+    height: 1.5385rem;
+    background-position: 85.175% 6.667%;
+  }
+  &.sprite-fhcx{
+    width: 1.6923rem;
+    height: 1.5385rem;
+    background-position: 58.713% 40.449%;
+  }
+  &.sprite-yxzl{
+    width: 1.6923rem;
+    height: 1.5385rem;
+    background-position: 92.703% 6.63%;
+  }
+  &.sprite-xgzd{
+    width: 1.6923rem;
+    height: 1.5385rem;
+    background-position: 51.882% 40.449%;
+  }
+  &.sprite-tft{
+    width: 1.6154rem;
+    height: 1.5385rem;
+    background-position: 75.538% 69.022%;
+  }
+  &.sprite-101{
+    width: 1.6923rem;
+    height: 1.5385rem;
+    background-position: 100% 6.63%;
+  }
+  &.sprite-yz{
+    width: 1.6923rem;
+    height: 1.5385rem;
+    background-position: 73.854% 25.414%;
+  }
+  &.sprite-vxbd{
+    width: 1.6923rem;
+    height: 1.5385rem;
+    background-position: 52.022% 25.698%;
+  }
+  &.sprite-lqzx{
+    width: 1.6923rem;
+    height: 1.5385rem;
+    background-position: 76% 55.307%;
+  }
+  &.sprite-xsbb{
+    width: 1.6923rem;
+    height: 1.5385rem;
+    background-position: 71.925% 40.449%;
+  }
+}
+//borders
+// each(@selectors,{
+//   .text-@{value} {
+//     text-align: @value !important;
+//   }
+// })
+each(@dirctions,{
+  .border-@{value} {
+    border-@{value}:1px solid @border-color
+  }
+})

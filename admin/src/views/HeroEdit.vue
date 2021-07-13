@@ -2,7 +2,7 @@
   <div class="about">
     <h1>{{id ? '编辑':'新建'}}英雄</h1>
     <el-form label-width="120px" @submit.native.prevent="save">
-      <el-tabs value="skills" type="border-card">
+      <el-tabs value="basic" type="border-card">
         <el-tab-pane label="基础信息" name="basic">
           <el-form-item label="英雄名称">
             <el-input v-model="model.name"></el-input>
@@ -36,10 +36,44 @@
                 class="avatar-uploader"
                 :action="uploadUrl"
                 :show-file-list="false"
-                :on-success="afterUpload">
+                :on-success="res => model.avatar = res.url">
                 <img v-if="model.avatar" :src="model.avatar" class="avatar">
                 <i v-else class="el-icon-plus avatar-uploader-icon"></i>
             </el-upload>
+          </el-form-item>
+          <el-form-item label="背景">
+            <el-upload
+                :headers="getAuthHeaders()"
+                class="avatar-uploader"
+                :action="uploadUrl"
+                :show-file-list="false"
+                :on-success = "testLoader">
+                <img v-if="model.banner" :src="model.banner" class="avatar">
+                <i  v-else class="el-icon-plus avatar-uploader-icon"></i>
+            </el-upload>
+          </el-form-item>
+          <el-form-item label="皮肤">
+            <el-upload
+              class="uploadimgs"
+              :headers="getAuthHeaders()"
+              :multiple="true"
+              :action="uploadUrl"
+              :file-list="filelist"
+              :show-file-list="false"
+              :on-success="afterUpload">
+              <i class="el-icon-plus avatar-uploader-icon"></i>
+            </el-upload>
+            <div class="imgs-wrap">
+                <el-card 
+                class="showSkins"
+                v-for="(item, index) in model.skins" :key="index"
+                >
+                  <img class="p-2" :src="item" alt="" style="height:120px">
+                  <el-form-item>
+                  <el-button type="danger" class="button" size="small" @click="model.skins.splice(index,1)">删除皮肤</el-button>
+                  </el-form-item>
+                </el-card>
+              </div>
           </el-form-item>
           <el-form-item label="背景故事">
             <el-input type="textarea" v-model="model.background"></el-input>
@@ -62,7 +96,8 @@
                 <el-form-item label="图标">
                   <el-upload
                     class="avatar-uploader"
-                    :action="$http.defaults.baseURL + '/upload'"
+                    :headers="getAuthHeaders()"
+                    :action="uploadUrl"
                     :show-file-list="false"
                     :on-success="res => $set(item,'icon',res.url)">
                     <img v-if="item.icon" :src="item.icon" class="avatar">
@@ -98,11 +133,13 @@
     },
     data() {
       return {
+        filelist:[],
         categories:[],
         model:{
           name:'',
           avatar:'',
           title:'',
+          banner:'',
           scores:{
             physicalDamage:0,
             magicDamage:0,
@@ -123,9 +160,21 @@
       }
     },
     methods: {
-      afterUpload(res){
-        this.model.avatar = res.url;
+      testLoader(res){
+        this.model.banner = res.url
       },
+      afterUpload(res){
+        this.filelist.push({name:res.originalname,url:res.url});
+        console.log(this.filelist)
+        this.model.skins.push(this.filelist[this.filelist.length-1].url)
+        //this.model.skins.push({name:res.originalname,url:res.url})
+        console.log(this.model.skins)
+      },
+      // async handleRemove(file, fileList){
+      //   const IMG = file._id
+      //   const INDEX = this.model.skins.indexOf(IMG)
+      //   await this.$http.delete(``)
+      // },
       async save(){
         //请求接口，提交数据
         let res
@@ -162,5 +211,26 @@
   .cards{
     margin-bottom: 1rem;
   }
+  .uploadimgs {
+    display:block;
+  }
+  .uploadimgs .el-upload {
+    display:block;
+  }
+  .img-wrap{
+    display: inline-block;
+    
+  }
+  .picturebtn{
+    position: relative;
+    top: -10px;
+    left:-30px;
+  }
+  .showSkins {
+    display: inline-block;
+    margin: 0px 20px;
+
+  }
+
 
 </style>
