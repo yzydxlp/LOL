@@ -106,7 +106,6 @@
         
       </template> 
     </m-list-card>
-    <m-card icon="menu" title="最新视频"></m-card>
     <m-card icon="menu" title="赛事中心"></m-card>
   </div>
 </template>

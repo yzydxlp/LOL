@@ -45,7 +45,19 @@ module.exports = app => {
   app.use('/admin/api/rest/:resource',authMiddleware(),resourceMiddleware(),router)
 
   const multer = require('multer')
-  const upload = multer({dest:__dirname+'/../../uploads'})
+  const MAO = require('multer-aliyun-oss');
+
+  const upload = multer({
+    dest:__dirname+'/../../uploads'
+    // storage: MAO({
+    //   config: {
+    //       region: 'oss-cn-shanghai',
+    //       accessKeyId: 'LTAI5t5nS72eyXY8kp3tyhHt',
+    //       accessKeySecret: '6RBKC3ZCbxdjT6DCBIeeMRHfah4DbR',
+    //       bucket: 'lolinfo'
+    //   }
+    // })
+  })
   app.post('/admin/api/upload',authMiddleware(),upload.single('file'),async(req,res)=> {
     const file = req.file
     //这里需要改成线上地址
