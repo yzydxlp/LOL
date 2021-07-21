@@ -4,7 +4,6 @@ const schema = new mongoose.Schema({
   name:String,
   avatar:String,
   title:String,
-  banner:String,
   categories:[{type:mongoose.Schema.Types.ObjectId,ref:'Category'}],
   scores:{
     physicalDamage:Number,//物理攻击

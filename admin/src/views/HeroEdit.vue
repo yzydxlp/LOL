@@ -41,17 +41,6 @@
                 <i v-else class="el-icon-plus avatar-uploader-icon"></i>
             </el-upload>
           </el-form-item>
-          <el-form-item label="背景">
-            <el-upload
-                :headers="getAuthHeaders()"
-                class="avatar-uploader"
-                :action="uploadUrl"
-                :show-file-list="false"
-                :on-success = "testLoader">
-                <img v-if="model.banner" :src="model.banner" class="avatar">
-                <i  v-else class="el-icon-plus avatar-uploader-icon"></i>
-            </el-upload>
-          </el-form-item>
           <el-form-item label="皮肤">
             <el-upload
               class="uploadimgs"
@@ -139,7 +128,6 @@
           name:'',
           avatar:'',
           title:'',
-          banner:'',
           scores:{
             physicalDamage:0,
             magicDamage:0,

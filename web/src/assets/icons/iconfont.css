@@ -1,6 +1,6 @@
 @font-face {
   font-family: "iconfont"; /* Project id  */
-  src: url('iconfont.ttf?t=1626067739952') format('truetype');
+  src: url('iconfont.ttf?t=1626354688743') format('truetype');
 }
 
 .iconfont {
@@ -11,8 +11,16 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-iconintroduce01:before {
+  content: "\e626";
+}
+
 .icon-menu:before {
   content: "\e647";
+}
+
+.icon-jieshao:before {
+  content: "\e609";
 }
 
 .icon-more:before {
@@ -21,6 +29,10 @@
 
 .icon-card-hero:before {
   content: "\e61f";
+}
+
+.icon-shipin:before {
+  content: "\e61a";
 }
 
 .icon-back:before {

@@ -126,6 +126,22 @@ each(@spacing-types,.(@typeKey,@type) {
   border:none;
   border-radius: 0.1538rem;
   // font-size: map-get(@font-sizes,'sm');
+  &.btn-lg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    i {
+      color: @lol-primary;
+      font-weight: bold;
+      font-size: 1.5rem;
+      margin-right: 0.5rem;
+    }
+    background:@lol-light;
+    border:1px solid @border-color;
+    border-radius: 5px;
+    padding: 0.8rem 0;
+    font-size: 1.1rem;
+  }
 }
 //nav
 .nav{

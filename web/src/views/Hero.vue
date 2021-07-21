@@ -16,6 +16,7 @@
           <img :src="img" class="w-100" alt="">
         </swiper-slide>
       </swiper>
+
       <div class="info d-flex text-lol-white flex-column px-2" v-if="model.scores">
         <span class="fs-lg py-1">{{model.title}}</span>
         <span class="fs-xxl py-2">{{model.name}}</span>
@@ -24,7 +25,6 @@
             class="tags my-3"
             v-for="(item,index) in model.categories.map(v=>v.name)" :key="index">{{item}}</span>
         </div>
-        <!-- <div class="py-1">{{model.categories.map(v=>v.name).join('/')}}</div> -->
         <div class="d-flex jc-between">
           <dl class="defail-stat">
             <dt>物理攻击</dt>
@@ -44,13 +44,73 @@
               <i class="up up4" :style="style4"></i>
             </dd>
           </dl>
-        </div>
-         
+        </div> 
       </div>
+
       <span class="sbg"></span>
     </div>
-    
-    
+    <!-- end of top -->
+    <div>
+      <div class="px-3 bg-lol-white">
+        <div class="nav d-flex pb-2 pt-3 border-bottom jc-around">
+          <div class="nav-item active">
+            <div class="nav-link">英雄初识</div>
+          </div>
+          <div class="nav-item">
+            <div class="nav-link">进阶攻略</div>
+          </div>
+        </div>
+      </div>
+      <swiper>
+        <swiper-slider class="w-100">
+          <div>
+            <div class="p-3 bg-lol-white border-bottom">
+              <div class="d-flex">
+                <router-link tag="button" to="/" class="btn btn-lg flex-1">
+                  <i class="iconfont icon-shipin"></i>
+                  英雄介绍视频
+                </router-link>
+                <router-link tag="button" to="/" class="btn btn-lg flex-1 ml-2">
+                  <i class="iconfont icon-shipin"></i>
+                  英雄介绍视频
+                </router-link>
+              </div>
+              <div class="skills mt-4">
+                <div class="d-flex jc-around">
+                  <img 
+                    :src="item.icon" 
+                    v-for="(item,index) in model.skills" :key="index" 
+                    alt=""
+                    class="skills-icon"
+                    :class="{activeSkillIcon: currentSkillIndex===index}"
+                    width="60"
+                    @click="currentSkillIndex=index"
+                  >
+                </div>
+                <div v-if="currentSkill">
+                  <div class="d-flex pt-3 pb-2">
+                    <div class="mr-3 fs-lg" style="font-weight:bold">{{currentSkill.name}}</div>
+                    <span class="text-lol-gray">{{currentSkill.position}}</span>
+                  </div>
+                  <p class="fs-sm">{{currentSkill.description}}</p>
+                  <div class="border-bottom"></div>
+                </div>
+              </div>
+            </div>
+            <m-card plain textc="#338c7a" icon="iconintroduce01" title="背景故事" class="background-story">
+              <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{model.background}}</p>
+            </m-card>
+            <m-card plain textc="#338c7a" icon="card-hero" title="使用技巧" class="background-story">
+              <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{model.allyTip}}</p>
+            </m-card>
+            <m-card plain textc="#338c7a" icon="card-hero" title="对抗技巧" class="background-story">
+              <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{model.enemyTip}}</p>
+            </m-card>
+          </div>
+        </swiper-slider>
+        <swiper-slider></swiper-slider>
+      </swiper>
+    </div>
   </div>
 </template>
 
@@ -74,11 +134,15 @@ export default {
     }
     ,style4(){
       return "width:" +this.model.scores.difficult*10 + "%"
+    },
+    currentSkill(){
+      return this.model.skills[this.currentSkillIndex]
     }
   },
   data() {
     return {
-      model: {}
+      model: {},
+      currentSkillIndex:0
     }
   },
   methods: {
@@ -94,6 +158,15 @@ export default {
 </script>
 
 <style lang="less">
+  
+
+  .skills-icon {
+    border-radius: 20%;
+    border:3px solid #fff;
+    &.activeSkillIcon {
+      border-color:#ee964b
+    }
+  }
   .topbar {
     position: sticky;
     top: 0;
@@ -110,10 +183,10 @@ export default {
       border-radius: 5px;
     }
     .info {
-      position: relative;
+      position: absolute;
       z-index: 2;
       float: left;
-      top: -185px;
+      top: 50px;
     }
     .sbg {
       position: absolute;
@@ -128,7 +201,7 @@ export default {
   }
   .defail-stat {
     // margin-top: 25px;
-    height: 90px;
+    height: 80px;
     width: 150px;
     display: block;
     // margin-block-start: 1em;

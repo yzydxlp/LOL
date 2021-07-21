@@ -27,7 +27,7 @@
             :key="index">{{item}}</span>
     </div>
     <div class="nav-icons bg-lol-white mt-3 text-center pt-3 text-lol-dark-gray">
-      <div class="d-flex flex-wrap">
+      <div class="d-flex flex-wrap" v-if="isNavShow">
         <div class="nav-item mb-3">
           <i class="sprite sprite-kf"></i>
           <div class="py-2">在线客服</div>
@@ -71,7 +71,7 @@
       </div>
       <div class="bg-lol-light py-2 fs-sm d-flex ai-center jc-center">
         <i class="arrowUp mr-2"></i>
-        <span>收起</span>
+        <span @click="isNavShow = !isNavShow">收起</span>
       </div>
     </div>
     <!-- end of nav icons -->
@@ -108,7 +108,6 @@
     </m-list-card>
     <m-card icon="menu" title="最新视频"></m-card>
     <m-card icon="menu" title="赛事中心"></m-card>
-    <m-card icon="menu" title="热门专辑"></m-card>
   </div>
 </template>
 
@@ -132,7 +131,8 @@
           }
         },
         newsCats:[],
-        heroCats:[]
+        heroCats:[],
+        isNavShow:true
       }
     },
     methods: {

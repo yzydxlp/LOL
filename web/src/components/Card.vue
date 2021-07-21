@@ -3,8 +3,10 @@
   <div class="card p-3 bg-lol-white mt-3">
     <div class="card-header d-flex ai-center pb-3">
       <i class="iconfont" :class="`icon-${icon}`"></i>
-      <div class="fs-xl flex-1 px-2">{{title}}</div>
-      <i class="iconfont icon-more"></i>
+      <div class="fs-xl flex-1 px-2 title" :style="`color:${textc}`">
+        {{title}}
+      </div>
+      <i class="iconfont icon-more" v-if="!plain"></i>
     </div>
     <div class="card-body pt-3">
       <slot></slot>
@@ -17,6 +19,12 @@
   export default {
     name:'Card',
     props:{
+      textc: {
+        type:String,
+        default () {
+          return '#000'
+        }
+      },
       title: {
         type:String,
         default (){
@@ -30,6 +38,9 @@
           return ''
         },
         required:true
+      },
+      plain: {
+        type:Boolean
       }
     }
   }
@@ -42,5 +53,8 @@
       border-bottom: 1px solid @border-color;
     }
     border-bottom: 1px solid @border-color;
+  }
+  .title {
+    font-weight: bold;
   }
 </style>
