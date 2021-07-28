@@ -7,6 +7,7 @@ module.exports = app => {
   const Category = mongoose.model('Category')
   const Hero = mongoose.model('Hero')
   const Item = mongoose.model('Item')
+  const Promo = mongoose.model('Promo')
   //导入新闻数据
   router.get('/news/init',async(req,res)=> {
     const parent = await Category.findOne({
@@ -308,9 +309,21 @@ module.exports = app => {
       res.send(await Item.find())
     })
     //物品接口
-    router.get('/items/list',async(req,res) => {
-      res.send(cats)
-    })  
+  router.get('/items/list',async(req,res) => {
+    const items = await Category.findOne({
+      name:'物品'
+    })
+    const cats = await Category.aggregate([
+      {$match:{parent:items._id}},
+      {$lookup:{
+        from:'items',
+        localField:'_id',
+        foreignField:'categories',
+        as:'itemList'
+      }}
+    ])
+    res.send(cats)
+  })  
   //文章详情
   router.get('/articles/:id',async(req,res) => {
     const data = await Article.findById(req.params.id).lean()
@@ -319,12 +332,19 @@ module.exports = app => {
     }).limit(2)
     res.send(data)
   })
-
+  //英雄详情
   router.get('/heroes/:id',async (req,res)=> {
     const data = await Hero
       .findById(req.params.id)
       .populate('categories')
       .lean()
+    res.send(data)
+  })
+  //活动列表获取
+  router.get('/promos/list',async (req,res)=> {
+    const data = await Promo.findOne({
+      name:'首页广告位'
+    })
     res.send(data)
   })
   app.use('/web/api',router)

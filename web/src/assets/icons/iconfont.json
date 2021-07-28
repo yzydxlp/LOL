@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "577339",
+      "name": "攻略",
+      "font_class": "gonglve",
+      "unicode": "e73b",
+      "unicode_decimal": 59195
+    },
+    {
       "icon_id": "877729",
       "name": "icon_introduce_01",
       "font_class": "iconintroduce01",
@@ -41,6 +48,13 @@
       "unicode_decimal": 58890
     },
     {
+      "icon_id": "4889738",
+      "name": "赛事",
+      "font_class": "saishi",
+      "unicode": "e61a",
+      "unicode_decimal": 58906
+    },
+    {
       "icon_id": "6654507",
       "name": "card-hero",
       "font_class": "card-hero",
@@ -48,11 +62,32 @@
       "unicode_decimal": 58911
     },
     {
+      "icon_id": "10578054",
+      "name": "下 拉",
+      "font_class": "xiala2-copy-copy",
+      "unicode": "e50a",
+      "unicode_decimal": 58634
+    },
+    {
+      "icon_id": "11125223",
+      "name": "首页",
+      "font_class": "1",
+      "unicode": "e619",
+      "unicode_decimal": 58905
+    },
+    {
       "icon_id": "11874500",
       "name": "视频",
       "font_class": "shipin",
-      "unicode": "e61a",
-      "unicode_decimal": 58906
+      "unicode": "e61b",
+      "unicode_decimal": 58907
+    },
+    {
+      "icon_id": "18724129",
+      "name": "社区",
+      "font_class": "shequ",
+      "unicode": "e627",
+      "unicode_decimal": 58919
     },
     {
       "icon_id": "19698192",
@@ -60,6 +95,13 @@
       "font_class": "back",
       "unicode": "e71c",
       "unicode_decimal": 59164
+    },
+    {
+      "icon_id": "22731044",
+      "name": "下 拉",
+      "font_class": "xiala",
+      "unicode": "e639",
+      "unicode_decimal": 58937
     }
   ]
 }

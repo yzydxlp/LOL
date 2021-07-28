@@ -1,12 +1,15 @@
 import Vue from 'vue'
 import App from './App.vue'
+import Vant from 'vant';
+
+Vue.use(Vant);
 
 
 Vue.config.productionTip = false
 
 import router from './router'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
-
+import 'vant/lib/index.css';
 import './assets/css/reset.css'
 import './assets/css/style.less'
 import 'swiper/swiper-bundle.css'

@@ -1,27 +1,48 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Main from '../views/Main.vue'
-import Home from '../views/Home.vue'
-import Article from '../views/Article.vue'
-import Hero from '../views/Hero.vue'
+const Home = ()=> import('../views/Home.vue')
+const Article = ()=> import('../views/Article.vue')
+const Hero = ()=> import('../views/Hero.vue')
+const Strategy = ()=> import('../views/Strategy.vue')
+const Competition = ()=> import('../views/Competition.vue')
+const Community = ()=> import('../views/Community.vue')
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
+    name:'main',
     component: Main,
     children: [
       {
         path:'/',
         name:'home',
-        component:Home
+        component:Home,
       },
       {
         path:'/articles/:id',
         name:'article',
         component:Article,
         props:true
+      },
+      {
+        path:'/strategy',
+        name:'strategy',
+        component:Strategy
+      },
+      {
+        path:'/competition',
+        name:'competition',
+        component:Competition
+        
+      },
+      {
+        path:'/my',
+        name:'my',
+        component:Community
+        
       },
     ]
     

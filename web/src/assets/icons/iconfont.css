@@ -1,6 +1,6 @@
 @font-face {
   font-family: "iconfont"; /* Project id  */
-  src: url('iconfont.ttf?t=1626850682757') format('truetype');
+  src: url('iconfont.ttf?t=1627360945166') format('truetype');
 }
 
 .iconfont {
@@ -9,6 +9,10 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-gonglve:before {
+  content: "\e73b";
 }
 
 .icon-iconintroduce01:before {
@@ -31,15 +35,35 @@
   content: "\e60a";
 }
 
+.icon-saishi:before {
+  content: "\e61a";
+}
+
 .icon-card-hero:before {
   content: "\e61f";
 }
 
+.icon-xiala2-copy-copy:before {
+  content: "\e50a";
+}
+
+.icon-1:before {
+  content: "\e619";
+}
+
 .icon-shipin:before {
-  content: "\e61a";
+  content: "\e61b";
+}
+
+.icon-shequ:before {
+  content: "\e627";
 }
 
 .icon-back:before {
   content: "\e71c";
+}
+
+.icon-xiala:before {
+  content: "\e639";
 }
 

@@ -1,22 +1,17 @@
 <template>
   <div class="page-hero" v-if="model">
-   <div class="topbar bg-lol-black py-2 px-3 d-flex ai-center text-lol-white">
-      <img src="../assets/logo.png" alt="" height="30px">
-      <div class="px-2 flex-1">
-        <!-- flex-1表示自己会变大，把左右撑开占满一格 -->
-        <span class="text-lol-white">英雄联盟</span>
-        <span class="ml-2 fs-sm">攻略站</span>
+    <nav-bar class="ai-center py-2 px-3 heronav">
+      <div slot="left">
+        <img src="../assets/logo.png" height="30px" alt="">
       </div>
-      <router-link to="/" tag="div" class="fs-xs">更多英雄 &gt;</router-link>
-    </div>
+      <div slot="center" class="text-lol-white  ml-5 d-flex">
+        <div v-for="(item,index) in titles" :key="index" class="flex-1">{{item}}</div>
+      </div>
+    </nav-bar>
+
     <div class="top">
       <div class="skins-wrap">
-        <swiper>
-          <swiper-slide 
-            v-for="(img,index) in model.skins" :key="index">
-            <img :src="img" class="w-100" alt="">
-          </swiper-slide>
-        </swiper>
+        <hero-swiper :skins="model.skins"></hero-swiper>
         <div class="info d-flex text-lol-white flex-column px-2" v-if="model.scores">
           <span class="fs-lg py-1">{{model.title}}</span>
           <span class="fs-xxl py-2">{{model.name}}</span>
@@ -66,16 +61,6 @@
       <swiper-slide>
         <div>
           <div class="p-3 bg-lol-white border-bottom">
-            <!-- <div class="d-flex">
-              <router-link tag="button" to="/" class="btn btn-lg flex-1">
-                <i class="iconfont icon-shipin"></i>
-                英雄介绍视频
-              </router-link>
-              <router-link tag="button" to="/" class="btn btn-lg flex-1 ml-2">
-                <i class="iconfont icon-shipin"></i>
-                英雄介绍视频
-              </router-link>
-            </div> -->
             <div class="skilltitle fs-xl border-bottom pb-3">
               <i class="iconfont icon-jinengdian" ></i>
               技能介绍
@@ -108,21 +93,29 @@
         </div>
       </swiper-slide>
       <swiper-slide>
-        <div>
+        <div class="fs-lg pb-5">  
           <m-card plain textc="#338c7a" icon="card-hero" title="使用技巧" class="background-story">
             <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{model.allyTip}}</p>
           </m-card>
           <m-card plain textc="#338c7a" icon="card-hero" title="对抗技巧" class="background-story">
             <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{model.enemyTip}}</p>
           </m-card>
+          <m-card plain textc="#338c7a" icon="card-hero" title="出装推荐" class="background-story">
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{model.enemyTip}}</p>
+          </m-card>
         </div>
       </swiper-slide>
     </swiper>
+    <back-btn @click.native="$router.go(-1)"></back-btn>
   </div>
 </template>
 
 <script>
+import NavBar from '../components/common/navbar/NavBar.vue'
+import BackBtn from '../components/content/backBtn/BackBtn.vue'
+import HeroSwiper from './HeroSwiper.vue'
 export default {
+  components: { BackBtn, NavBar, HeroSwiper},
   name:'Hero',
   props: {
     id: {
@@ -155,13 +148,14 @@ export default {
       currentSkillIndex:0,
       swiperspans:['英雄初识','进阶攻略'],
       promosActive:0,
-      
+      titles:['详情','技能','背景']
     }
   },
   methods: {
     async fetch() {
       const res = await this.$http.get(`heroes/${this.id}`)
       this.model = res.data
+      // console.log(this.model)
     }
   },
   created() {
@@ -171,7 +165,16 @@ export default {
 </script>
 
 <style lang="less">
-  
+.page-hero{
+  position: relative;
+  z-index: 999;
+  height: 100vh;
+}
+  .heronav{
+    position: sticky;
+    top:0;
+    z-index: 999;
+  }
   .skilltitle{
     color:#338c7a;
     font-weight: bold;
@@ -206,15 +209,7 @@ export default {
       float: left;
       top: 0px;
       bottom: 5px;
-      background: rgba(0, 0, 0, 0.6);
-      
-    }
-    .sbg {
-      width: 100px;
-      height: 100px;
-      z-index: 1;
-      background: #000;
-      opacity: .6;
+      background: rgba(0, 0, 0, 0.6); 
     }
   }
   .defail-stat {

@@ -16,6 +16,14 @@
             <i v-else class="el-icon-plus avatar-uploader-icon"></i>
         </el-upload>
       </el-form-item>
+      <el-form-item label="类型">
+         <el-select v-model="model.categories" multiple>
+              <el-option 
+                v-for="item of categories" 
+                :key="item._id"
+                :label="item.name" :value="item._id"></el-option>
+            </el-select>
+      </el-form-item>
       <el-form-item>
         <el-button type="primary" native-type="submit">保存</el-button>
       </el-form-item>
@@ -32,6 +40,7 @@
     data() {
       return {
         model:{},
+        categories:[]
       }
     },
     methods: {
@@ -40,13 +49,12 @@
       },
       async save(){
         //请求接口，提交数据
-        let res
         if(this.id) {
-          res = await this.$http.put(`rest/items/${this.id}`,this.model)
+          await this.$http.put(`rest/items/${this.id}`,this.model)
         }else {
-          res = await this.$http.post('rest/items',this.model)
+          await this.$http.post('rest/items',this.model)
         }
-        console.log(res)
+        // console.log(res)
         this.$router.push('/items/list')
         this.$message({
           type:'sucess',
@@ -56,10 +64,18 @@
       async fetch() {
         const res  = await this.$http.get(`rest/items/${this.id}`)
         this.model = res.data
+      },
+      async fetchCategories() {
+        const res  = await this.$http.get(`rest/categories`)
+        this.categories = res.data.filter(item=>{
+          return item.parent&&item.parent.name=="物品"
+        })
       }
+
     },
     created() {
       this.id && this.fetch()
+      this.fetchCategories()
     },
   }
 </script>

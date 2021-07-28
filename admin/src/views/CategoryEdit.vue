@@ -44,7 +44,7 @@
         }
         
         console.log(res)
-        this.$router.push('/categories/list')
+        this.$router.push('/categories/list')//创建完之后转换到分类列表
         this.$message({
           type:'sucess',
           message:'保存成功'

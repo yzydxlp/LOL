@@ -11,7 +11,7 @@ app.use('/admin',express.static(__dirname+'/admin'))
 app.use('/',express.static(__dirname+'/web'))
 app.use('/uploads',express.static(__dirname+'/uploads'))
 
-require('./plugins/db.js')(app)
+require('./plugins/db.js')(app)//引用数据库
 require('./routes/admin')(app)
 require('./routes/web')(app)
 
